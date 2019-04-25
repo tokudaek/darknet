@@ -236,7 +236,59 @@ image **load_alphabet()
     return alphabets;
 }
 
+void get_detections_csv(image im, detection *dets, int num, float thresh, char **names, image **alphabet, int classes, char *buff)
+{
+    int i,j;
+     /*char buff[10000];*/
+ 	char row[1024];
+	char *name;
+	float prob;
+
+	buff[0] = 0;
+    for(i = 0; i < num; ++i){
+        char labelstr[4096] = {0};
+        int class = -1;
+        for(j = 0; j < classes; ++j){
+            if (dets[i].prob[j] > thresh){
+                if (class < 0) {
+                    strcat(labelstr, names[j]);
+                    class = j;
+                } else {
+                    strcat(labelstr, ", ");
+                    strcat(labelstr, names[j]);
+                }
+                /*printf("%s: %.0f%%\n", names[j], dets[i].prob[j]*100);*/
+				name = names[j];
+				prob = dets[i].prob[j];
+            }
+        }
+        if(class >= 0){
+            /*int width = im.h * .006;*/
+
+            //printf("%d %s: %.0f%%\n", i, names[class], prob*100);
+            box b = dets[i].bbox;
+			/*printf("%f %f %f %f\n", b.x, b.y, b.w, b.h);*/
+
+            int left  = (b.x-b.w/2.)*im.w;
+            int right = (b.x+b.w/2.)*im.w;
+            int top   = (b.y-b.h/2.)*im.h;
+            int bot   = (b.y+b.h/2.)*im.h;
+
+
+            if(left < 0) left = 0;
+            if(right > im.w-1) right = im.w-1;
+            if(top < 0) top = 0;
+            if(bot > im.h-1) bot = im.h-1;
+
+			snprintf(row, 128, "%s,%f,%d,%d,%d,%d\n", name, prob,
+					left, top, right, bot);
+			strcat(buff, row);
+
+        }
+    }
+}
 void draw_detections(image im, detection *dets, int num, float thresh, char **names, image **alphabet, int classes)
+
 {
     int i,j;
 
