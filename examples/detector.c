@@ -634,7 +634,6 @@ void test_detector_list(char *datacfg, char *cfgfile, char *weightfile,
 	size_t len = 0;
 	ssize_t nread;
 
-	printf("%s\n", listpath);
 	stream = fopen(listpath, "r");
 	if (stream == NULL) {
 		perror("fopen");
@@ -652,9 +651,11 @@ void test_detector_list(char *datacfg, char *cfgfile, char *weightfile,
 	network *net = load_network(cfgfile, weightfile, 0);
 	set_batch_network(net, 1);
 	srand(2222222);
+	int counter = -1;
 
 	while ((nread = getline(&line, &len, stream)) != -1) {
 		if (line[nread - 1] == '\n') line[nread - 1] = 0;
+		counter += 1;
 
 		double time;
 		char buff[256], outcsv[256];
@@ -680,7 +681,7 @@ void test_detector_list(char *datacfg, char *cfgfile, char *weightfile,
 		float *X = sized.data;
 		time=what_time_is_it_now();
 		network_predict(net, X);
-		printf("%s: %f s.\n", input, what_time_is_it_now()-time);
+		printf("%d: %s: %f s.\n", counter, input, what_time_is_it_now()-time);
 		int nboxes = 0;
 		detection *dets = get_network_boxes(net, im.w, im.h, thresh, hier_thresh, 0, 1, &nboxes);
 		if (nms) do_nms_sort(dets, nboxes, l.classes, nms);
