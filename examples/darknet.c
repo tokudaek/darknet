@@ -5,7 +5,7 @@
 #include <stdio.h>
 
 extern void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *filename, int top);
-extern void test_detector(char *datacfg, char *cfgfile, char *weightfile, char *filename, float thresh, float hier_thresh, char *outfile, int fullscreen, char *outdetections);
+extern void test_detector(char *datacfg, char *cfgfile, char *weightfile, char *filename, float thresh, float hier_thresh, char *outfile, int fullscreen);
 extern void test_detector_list(char *datacfg, char *cfgfile, char *weightfile, char *listpath, float thresh, float hier_thresh, char *outputdir, int fullscreen);
 extern void run_yolo(int argc, char **argv);
 extern void run_detector(int argc, char **argv);
@@ -435,7 +435,7 @@ int main(int argc, char **argv)
         char *filename = (argc > 4) ? argv[4]: 0;
         char *outfile = find_char_arg(argc, argv, "-out", 0);
         int fullscreen = find_arg(argc, argv, "-fullscreen");
-        test_detector("cfg/coco.data", argv[2], argv[3], filename, thresh, .5, outfile, fullscreen, NULL);
+        test_detector("cfg/coco.data", argv[2], argv[3], filename, thresh, .5, outfile, fullscreen);
     } else if (0 == strcmp(argv[1], "list")){
 		if (argc < 7) {
 			printf("Usage: ./darknet list <CFG> <WEIGHTS> <THRESH> <LISTPATH> <OUTPUTDIR>\n");
