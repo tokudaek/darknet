@@ -691,7 +691,7 @@ void test_detector_list(char *datacfg, char *cfgfile, char *weightfile,
 
 
 		FILE *outfh = fopen(outcsv, "w");
-		fprintf(outfh, outdetections); //potential segfault
+		fprintf(outfh, "%s", outdetections); //potential segfault
 		fclose(outfh);
 
 		free_detections(dets, nboxes);
