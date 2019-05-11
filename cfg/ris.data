@@ -1,6 +1,6 @@
 classes= 5
 train  = /misc/users/keiji/ris/yolofmt/train.txt
 valid  = /misc/users/keiji/ris/yolofmt/test.txt
-names = data/ris.names
+names = /misc/users/keiji/darknet/data/ris.names
 backup = backup
 
