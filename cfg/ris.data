@@ -1,6 +1,6 @@
 classes= 5
 train  = /home/keiji/results/derain/cvpr_ris/yolofmt/train.txt
 valid  = /home/keiji/results/derain/cvpr_ris/yolofmt/test.txt
-names = /home/keiji/results/derain/cvpr_ris/yolofmt/names.txt
+names = /home/keiji/results/derain/cvpr_ris/yolofmt/ris.names
 backup = backup
 
