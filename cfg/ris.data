@@ -1,6 +1,6 @@
 classes= 5
-train  = /misc/users/keiji/ris/yolofmt/train.txt
-valid  = /misc/users/keiji/ris/yolofmt/test.txt
-names = /misc/users/keiji/darknet/data/ris.names
+train  = /home/keiji/results/derain/cvpr_ris/yolofmt/train.txt
+valid  = /home/keiji/results/derain/cvpr_ris/yolofmt/test.txt
+names = /home/keiji/results/derain/cvpr_ris/yolofmt/names.txt
 backup = backup
 
